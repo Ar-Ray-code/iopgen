@@ -1,0 +1,18 @@
+pub:
+  keyword: create_publisher
+  args:
+    - topic_name
+    - qos_profile
+
+sub:
+  keyword: create_subscription
+  args:
+    - topic_name
+    - qos_profile
+    - callback
+
+param:
+  keyword: declare_parameter
+  args:
+    - parameter_name
+    - default_value
