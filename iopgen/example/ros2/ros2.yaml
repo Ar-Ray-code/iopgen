@@ -1,4 +1,4 @@
-pub:
+publish:
   keyword: create_publisher
   args:
     - topic_name:
@@ -8,10 +8,10 @@ pub:
       start: "<"
       end: ">"
     - qos_profile:
-      start: "\""
+      start: "\","
       end: ");"
 
-sub:
+subscribe:
   keyword: create_subscription
   args:
     - topic_name:
@@ -21,13 +21,13 @@ sub:
       start: "<"
       end: ">"
     - qos_profile:
-      start: "\""
+      start: "\","
       end: ",std::bind("
     - callback:
       start: "std::bind("
       end: ",this"
 
-param:
+parameter:
   keyword: declare_parameter
   args:
     - parameter_name:
