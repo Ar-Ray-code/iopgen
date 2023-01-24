@@ -54,7 +54,7 @@ pub fn get_reference(yaml_path: String, target_key: &str) -> Reference {
         reference.args.insert(arg_name.clone(), arg_name);
         i += 1;
     }
-    println!("reference: {:?}", reference);
+    // println!("reference: {:?}", reference);
     reference
 }
 
@@ -82,7 +82,7 @@ fn get_arg(src: String, position: i64) -> String {
     let mut output = src.clone();
     output = split_by_ab(output, "(".to_string(), ");".to_string());
     let args = output.split(",").collect::<Vec<&str>>();
-    println!("args: {:?}", args);
+    // println!("args: {:?}", args);
     args[position as usize].to_string()
 }
 

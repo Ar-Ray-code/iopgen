@@ -1,9 +1,10 @@
 #!/bin/sh
 PROJECT_NAME=iopgen
+SRC=`realpath $1`
+
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
+ENTRY_TERMINAL_POINT=$(pwd)
 cd $SCRIPT_DIR/$PROJECT_NAME
-# arg
-SRC=$1
 
 cargo build
 
@@ -14,10 +15,9 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "=============================="
-echo "$SCRIPT_DIR/$PROJECT_NAME/target/debug/$PROJECT_NAME example/cpp/$SRC"
-echo ""
+echo "src: $SRC"
 
-$SCRIPT_DIR/$PROJECT_NAME/target/debug/$PROJECT_NAME example/cpp/$SRC example/ros2/ros2.yaml ./EXPORT.md
+$SCRIPT_DIR/$PROJECT_NAME/target/debug/$PROJECT_NAME $SRC example/ros2/ros2.yaml ./EXPORT.md
 
 echo ""
 echo "=============================="

@@ -18,7 +18,8 @@ fn main() {
     
    
     if args.len() < 3 {
-        println!("Usage: iopgen [file] [export to md]");
+        println!("Usage: iopgen [files] [export to md]");
+        println!("Example: iopgen ./test01.cpp ./test02.cpp ./test03.cpp ./test.md ./config.yaml");
         return;
     }
 
