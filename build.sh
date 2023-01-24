@@ -17,7 +17,7 @@ echo "=============================="
 echo "$SCRIPT_DIR/$PROJECT_NAME/target/debug/$PROJECT_NAME example/cpp/$SRC"
 echo ""
 
-$SCRIPT_DIR/$PROJECT_NAME/target/debug/$PROJECT_NAME example/cpp/$SRC
+$SCRIPT_DIR/$PROJECT_NAME/target/debug/$PROJECT_NAME example/cpp/$SRC example/ros2/ros2.yaml
 
 echo ""
 echo "=============================="

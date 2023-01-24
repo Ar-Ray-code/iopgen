@@ -1,18 +1,38 @@
 pub:
   keyword: create_publisher
   args:
-    - topic_name
-    - qos_profile
+    - topic_name:
+      start: ">(\""
+      end: "\""
+    - msg_type:
+      start: "<"
+      end: ">"
+    - qos_profile:
+      start: "\""
+      end: ");"
 
 sub:
   keyword: create_subscription
   args:
-    - topic_name
-    - qos_profile
-    - callback
+    - topic_name:
+      start: ">(\""
+      end: "\""
+    - msg_type:
+      start: "<"
+      end: ">"
+    - qos_profile:
+      start: "\""
+      end: ",std::bind("
+    - callback:
+      start: "std::bind("
+      end: ",this"
 
 param:
   keyword: declare_parameter
   args:
-    - parameter_name
-    - default_value
+    - parameter_name:
+      start: "(\""
+      end: "\""
+    - default_value:
+      start: ","
+      end: ");"
