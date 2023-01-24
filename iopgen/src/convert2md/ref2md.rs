@@ -13,6 +13,7 @@ fn convert_one_header(_refs: &Vec<Reference>, _target_ref_type: &str, _types: &V
     md_string.push_str(&_header);
     
     let mut i = 0;
+    let mut i_old = i;
     for ref_ in _refs {
         if ref_.ref_type == _target_ref_type {
             md_string.push_str(&"| ");
@@ -24,8 +25,9 @@ fn convert_one_header(_refs: &Vec<Reference>, _target_ref_type: &str, _types: &V
             }
             i += 1;
         }
-        if i > 0 {
+        if i > i_old {
             md_string.push_str(&"\n");
+            i_old = i;
         }
     }
     md_string
@@ -35,7 +37,7 @@ pub fn convert(refs: Vec<Reference>) -> String {
     let mut md_string = String::new();
 
     let sub_header = String::from("# Reference
-\n## Subscribe\n
+\n<br>\n\n## Subscribe (Input)\n
 | topic_name | message type | qos_profile | callback |
 | --- | --- | --- | --- |\n");
 
@@ -43,7 +45,7 @@ pub fn convert(refs: Vec<Reference>) -> String {
     md_string.push_str(&convert_one_header(&refs, "subscribe", &sub_types, sub_header));
 
 
-    let pub_header = String::from("## Publish\n
+    let pub_header = String::from("\n<br>\n\n## Publish (Output)\n
 | topic_name | message type | qos_profile |
 | --- | --- | --- |\n");
 
@@ -51,14 +53,58 @@ pub fn convert(refs: Vec<Reference>) -> String {
     md_string.push_str(&convert_one_header(&refs, "publish", &pub_types, pub_header));
 
 
-    let param_header = String::from("## Parameter\n
+    let param_header = String::from("\n<br>\n\n## Parameter\n\n
 | parameter_name | default_value |
 | --- | --- |\n");
 
     let param_types = vec!["parameter_name", "default_value"];
     md_string.push_str(&convert_one_header(&refs, "parameter", &param_types, param_header));
 
+    let footer = String::from("\n<br>\n\n## Operation check status\n
+| OS | Arch | Distro | status |
+| --- | --- | --- | --- |
+| Ubuntu20 | amd64 | Galactic | |
+
+<br>
+
+## Requirement
+
+- ROS2
+- Laptop
+
+<br>
+
+## How to build
+
+```bash
+# write here
+```
+
+<br>
+
+## Run
+
+```bash
+# write here
+```
+
+Add a picture of the operation result.
+
+<br>
+
+## Reference
+
+Add a reference to the source code.
+
+- [iopgen](https://github.com/Ar-Ray-code/iopgen)
+
+<br>
+");
+
+    md_string.push_str(&footer);
+
     md_string
+
 }
 
 
