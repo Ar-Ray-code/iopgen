@@ -4,17 +4,18 @@
 // 
 // - reference.rs
 // ===========================================
+
 use std::collections::HashMap;
 use std::fmt;
-type StartEndSplitString = super::start_end_split_string::StartEndSplitString;
 
 
 pub struct Reference {
     pub ref_type: String,
     pub keyword: String,
     pub args: HashMap<String, String>,
-    pub line: i32,
-    pub args_ab: HashMap<String, StartEndSplitString>,
+    pub line: i64,
+    // pub args_ab: HashMap<String, StartEndSplitString>,
+    pub args_ab: HashMap<String, i64>,
 }
 
 impl Reference {

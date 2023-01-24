@@ -7,9 +7,6 @@
 
 use std::env;
 use std::io::prelude::*;
-use std::io::BufReader;
-// File
-use std::fs::File;
 
 mod cpp;
 mod convert2md;

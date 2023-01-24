@@ -1,38 +1,20 @@
 publish:
   keyword: create_publisher
   args:
-    - topic_name:
-      start: ">(\""
-      end: "\""
-    - msg_type:
-      start: "<"
-      end: ">"
-    - qos_profile:
-      start: "\","
-      end: ");"
+    - topic_name: 0
+    - msg_type: -1
+    - qos_profile: 1
 
 subscribe:
   keyword: create_subscription
   args:
-    - topic_name:
-      start: ">(\""
-      end: "\""
-    - msg_type:
-      start: "<"
-      end: ">"
-    - qos_profile:
-      start: "\","
-      end: ",std::bind("
-    - callback:
-      start: "std::bind("
-      end: ",this"
+    - topic_name: 0
+    - msg_type: -1
+    - qos_profile: 1
+    - callback: 2
 
 parameter:
   keyword: declare_parameter
   args:
-    - parameter_name:
-      start: "(\""
-      end: "\""
-    - default_value:
-      start: ","
-      end: ");"
+    - parameter_name: 0
+    - default_value: 1

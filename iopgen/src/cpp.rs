@@ -15,10 +15,9 @@ pub mod cat;
 pub mod rm_duplication;
 pub mod func_list;
 pub mod search_keyword;
-// grandchild
+
 pub mod structs {
     pub mod reference;
-    pub mod start_end_split_string;
 }
 
 type Reference = super::cpp::structs::reference::Reference;
@@ -95,9 +94,12 @@ pub fn cpp_func(args_: Vec<String>) -> Vec::<Reference>
     keys.retain(|x| x != "");
 
     for key in &keys {
+        println!("processing: {} ...", key);
         let mut _refer = search_keyword::get_reference(yaml_path.clone(), key);
+        
         let mut _result = search_keyword::search_keyword(cat_string.clone(), _refer);
         result.append(&mut _result);
+        println!("done!\n");
     }
 
     result
