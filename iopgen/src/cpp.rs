@@ -13,7 +13,6 @@ use std::fs::File;
 pub mod check_include;
 pub mod cat;
 pub mod rm_duplication;
-pub mod func_list;
 pub mod search_keyword;
 
 pub mod structs {
