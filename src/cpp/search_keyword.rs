@@ -38,6 +38,61 @@ pub fn get_reference(yaml_object: &yaml_rust::Yaml, target_key: &str) -> Referen
 }
 
 
+// pub fn search_keyword_old(src: String, refer: Reference) -> Vec<Reference> {
+//     let mut refs = Vec::new();
+//     let lines = src.split("\n");
+
+//     // find pub name -----------------------------------
+//     let mut tmp_lines = lines.clone();
+//     let mut i = 0;
+//     let mut tmp_pub_line = String::new();
+//     let mut line_push_flag = false;
+
+//     for line in &mut tmp_lines {
+//         if line.contains(&refer.keyword) || line_push_flag {
+//             if !line_push_flag {
+//                 line_push_flag = true;
+//                 tmp_pub_line = String::new();
+//             }
+//             else {
+//                 if line.contains(";") {
+//                     line_push_flag = false;
+
+//                     let mut ref_ = Reference::new();
+//                     ref_.keyword = refer.keyword.clone();
+//                     ref_.ref_type = refer.ref_type.clone();
+
+//                     let mut output_line = tmp_pub_line.clone() + line;
+
+//                     output_line = output_line.replace(" ", "");
+
+//                     // println!("------------------------------------");
+//                     // println!("refer.args_ab.keys(): {:?}", refer.args_ab.keys());
+//                     // println!("args_ab: {:?}", refer.args_ab);
+//                     // println!("------------------------------------");
+
+//                     for arg in refer.args_ab.keys() {
+//                         if refer.args_ab[arg] < 0 {
+//                             ref_.args.insert(arg.clone(), get_type(output_line.clone()));
+//                             continue;
+//                         }
+//                         let arg_value = get_arg(output_line.clone(), refer.args_ab[arg]);
+
+//                         ref_.line = i as i64;
+//                         ref_.args.insert(arg.clone(), arg_value.clone());
+//                     }
+//                     refs.push(ref_);
+//                 }
+//             }
+//             tmp_pub_line = tmp_pub_line + line;
+//         }
+//         i += 1;
+//     }
+//     refs
+// }
+
+
+
 pub fn search_keyword(src: String, refer: Reference) -> Vec<Reference> {
     let mut refs = Vec::new();
     let lines = src.split("\n");
@@ -48,15 +103,28 @@ pub fn search_keyword(src: String, refer: Reference) -> Vec<Reference> {
     let mut tmp_pub_line = String::new();
     let mut line_push_flag = false;
 
+    let mut line_hierarchy = 0;
+
     for line in &mut tmp_lines {
-        if line.contains(&refer.keyword) || line_push_flag {
+        if line.contains(&refer.keyword) || line_push_flag && !line.contains("//") && !line.contains("/*") {
             if !line_push_flag {
                 line_push_flag = true;
+                line_hierarchy = 0;
                 tmp_pub_line = String::new();
             }
-            else {
-                if line.contains(";") {
+            // count '(' and ')'
+            for c in line.chars() {
+                if c == '(' {
+                    line_hierarchy += 1;
+                }
+                else if c == ')' {
+                    line_hierarchy -= 1;
+                }
+            }
+            if line_push_flag {
+                if line_hierarchy == 0 {
                     line_push_flag = false;
+                    
 
                     let mut ref_ = Reference::new();
                     ref_.keyword = refer.keyword.clone();
@@ -67,8 +135,10 @@ pub fn search_keyword(src: String, refer: Reference) -> Vec<Reference> {
                     output_line = output_line.replace(" ", "");
 
                     // println!("------------------------------------");
+                    // println!("keyword: {}", refer.keyword);
                     // println!("refer.args_ab.keys(): {:?}", refer.args_ab.keys());
                     // println!("args_ab: {:?}", refer.args_ab);
+                    // println!("output_line: {}", output_line);
                     // println!("------------------------------------");
 
                     for arg in refer.args_ab.keys() {

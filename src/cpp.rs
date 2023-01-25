@@ -58,15 +58,18 @@ pub fn cpp_func(yaml_path: String, codes: Vec<String>) -> Vec::<Reference>
     let unique_files = rm_duplication::rm_duplication(files);
     _cat_string = cat::cat_files(unique_files);
 
-    let yaml_object = &get_yaml_object(yaml_path);
+    // println!("cat_string: {}", _cat_string);
 
-    let mut keys = get_1st_depth_keys(yaml_object);
-    keys.retain(|x| x != "");
+    let yaml_object = &get_yaml_object(yaml_path);
+    let keys = get_1st_depth_keys(yaml_object);
+    
 
     for key in &keys {
         println!("processing: {} ...", key);
         let _refer = search_keyword::get_reference(yaml_object, key);
+        // println!("refer: {:?}", _refer);
         let mut _result = search_keyword::search_keyword(_cat_string.clone(), _refer);
+        // println!("result: {:?}", _result);
 
         result.append(&mut _result);
     }

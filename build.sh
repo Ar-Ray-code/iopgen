@@ -1,12 +1,14 @@
 #!/bin/sh
 PROJECT_NAME=iopgen
-SRC=`realpath $1`
+SRC0=`realpath $1`
+SRC1=`realpath $2`
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 ENTRY_TERMINAL_POINT=$(pwd)
 cd $SCRIPT_DIR/$PROJECT_NAME
 
-cargo build --release
+# cargo build --release
+cargo build
 
 # failed
 if [ $? -ne 0 ]; then
@@ -15,7 +17,12 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "============= IOP Gen ================="
-$SCRIPT_DIR/$PROJECT_NAME/target/release/$PROJECT_NAME -c $SRC -o ./EXPORT.md -y example/ros2/ros2.yaml
+$SCRIPT_DIR//target/debug/$PROJECT_NAME \
+    -c $SRC0 $SRC1 \
+    -o ./EXPORT.md \
+    -y example/ros2/rclcpp_iop.yaml \
+    -t "Title" \
+    -j
 
 echo ""
 echo "======================================"

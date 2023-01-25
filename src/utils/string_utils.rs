@@ -57,5 +57,6 @@ pub fn get_1st_depth_keys(yaml_object: &yaml_rust::Yaml) -> Vec<String> {
     for key in yaml_object.as_hash().unwrap().keys() {
         keys.push(key.as_str().unwrap().to_string());
     }
+    keys.retain(|x| x != "");
     keys
 }
