@@ -46,9 +46,12 @@ fn convert_one_header(_refs: &Vec<Reference>, _target_ref_type: &str, _types: &V
             for type_ in _types {                
                 let _type_str = type_.to_string();
                 let arg = ref_.args.get(&_type_str).unwrap();
-                // remove ' " from arg
+
+                // remove ",',),;
                 let arg = arg.replace("\"", "");
                 let arg = arg.replace("'", "");
+                let arg = arg.replace(")", "");
+                let arg = arg.replace(";", "");
 
                 md_string.push_str(&"`");
                 md_string.push_str(&arg);
