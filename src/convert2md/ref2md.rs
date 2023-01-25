@@ -8,7 +8,7 @@
 use crate::structs::reference::Reference;
 
 
-static template_footer: &str  = "
+static TEMPLATE_FOOTER: &str  = "
 \n<br>\n
 
 ## $(0)\n
@@ -66,7 +66,7 @@ fn convert_one_header(_refs: &Vec<Reference>, _target_ref_type: &str, _types: &V
 
 fn gen_footer(jp_flag: bool) -> String {
     // translation
-    let mut _footer = template_footer.clone().to_string();
+    let mut _footer = TEMPLATE_FOOTER.clone().to_string();
 
     let footer_en = vec![
         ("Operation check status", "動作確認状況"), // 0
