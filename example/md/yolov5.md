@@ -13,8 +13,8 @@
 
 | topic_name | message type | qos_profile | description |
 | --- | --- | --- | --- |
-| `yolov5/bounding_boxes` | `BoundingBoxes` | `10)` | 
-| `yolov5/image_raw` | `Image` | `10)` | 
+| `yolov5/bounding_boxes` | `BoundingBoxes` | `10` | 
+| `yolov5/image_raw` | `Image` | `10` | 
 
 <br>
 
@@ -25,18 +25,18 @@
 | --- | --- | --- |
 | `weights` | `str` | 
 | `data` | `str` | 
-| `imagez_height` | `640)` | 
-| `imagez_width` | `640)` | 
-| `conf_thres` | `0.25)` | 
-| `iou_thres` | `0.45)` | 
-| `max_det` | `1000)` | 
-| `device` | `cpu)` | 
-| `view_img` | `True)` | 
-| `classes` | `None)` | 
-| `agnostic_nms` | `False)` | 
-| `line_thickness` | `2)` | 
-| `half` | `False)` | 
-| `dnn` | `False)` | 
+| `imagez_height` | `640` | 
+| `imagez_width` | `640` | 
+| `conf_thres` | `0.25` | 
+| `iou_thres` | `0.45` | 
+| `max_det` | `1000` | 
+| `device` | `cpu` | 
+| `view_img` | `True` | 
+| `classes` | `None` | 
+| `agnostic_nms` | `False` | 
+| `line_thickness` | `2` | 
+| `half` | `False` | 
+| `dnn` | `False` | 
 
 
 <br>
