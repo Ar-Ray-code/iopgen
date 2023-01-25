@@ -25,8 +25,13 @@ pub fn check_include(path: &str, search_from: &Vec<String>) -> Vec<String> {
             }
             let mut include_path = line.split(" ").collect::<Vec<&str>>();
             include_path.remove(0);
+            
+            // remove ",',),;
             let include_path = include_path.join(" ");
             let include_path = include_path.replace("\"", "");
+            let include_path = include_path.replace(")", "");
+            let include_path = include_path.replace(";", "");
+
 
             for search_path in search_from {
                 let search_path = search_path.to_string() + "/" + &include_path;
