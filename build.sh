@@ -16,15 +16,11 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "============= IOP Gen ================="
 $SCRIPT_DIR//target/debug/$PROJECT_NAME \
     -c $SRC0 $SRC1 \
     -o ./EXPORT.md \
-    -y example/ros2/rclcpp_iop.yaml \
+    -y example/yaml/rclpy_iop.yaml \
     -t "Title" \
     -j
-
-echo ""
-echo "======================================"
 
 cd -

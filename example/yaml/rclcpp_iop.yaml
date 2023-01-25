@@ -1,15 +1,15 @@
 publish:
   keyword: this->create_publisher
   args:
-    - topic_name: 0
     - msg_type: -1
+    - topic_name: 0
     - qos_profile: 1
 
 subscribe:
   keyword: create_subscription
   args:
-    - topic_name: 0
     - msg_type: -1
+    - topic_name: 0
     - qos_profile: 1
 
 parameter:
