@@ -15,9 +15,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "=============================="
-echo "src: $SRC"
-
-$SCRIPT_DIR/$PROJECT_NAME/target/debug/$PROJECT_NAME $SRC example/ros2/ros2.yaml ./EXPORT.md
+$SCRIPT_DIR/$PROJECT_NAME/target/debug/$PROJECT_NAME -c $SRC -o ./EXPORT.md -y example/ros2/ros2.yaml
 
 echo ""
 echo "=============================="

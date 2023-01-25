@@ -5,7 +5,7 @@
 // - ref2md.rs
 // ===========================================
 
-use crate::cpp::structs::reference::Reference;
+use crate::structs::reference::Reference;
 
 
 fn convert_one_header(_refs: &Vec<Reference>, _target_ref_type: &str, _types: &Vec<&str> , _header: String) -> String {

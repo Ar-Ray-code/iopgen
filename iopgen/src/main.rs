@@ -4,41 +4,28 @@
 // 
 // - main.rs
 // ===========================================
-
-use std::env;
 use std::io::prelude::*;
 
 mod cpp;
 mod convert2md;
-
-type Reference = cpp::structs::reference::Reference;
+mod utils;
+mod structs;
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
+    let mut output_data = String::new();
     
-   
-    if args.len() < 3 {
-        println!("Usage: iopgen [files] [export to md]");
-        println!("Example: iopgen ./test01.cpp ./test02.cpp ./test03.cpp ./test.md ./config.yaml");
-        return;
-    }
+    let (yaml_path, codes, output_path) =
+        utils::args::parse_args();
 
-    let mut refs = Vec::<Reference>::new();
-
-    if args[1].clone().ends_with(".cpp") {
-        refs = cpp::cpp_func(args.clone());
-    }
-
-    let mut target_md = String::new();
-    for path in &args[1..] {
-        if path.ends_with(".md") {
-            target_md = path.to_string();
-        }
-    }
+    let refs = cpp::cpp_func(yaml_path, codes);
+    // println!("refs: {:?}", refs);
     
-    let md_data = convert2md::ref2md::convert(refs);
-    // write
-    let mut file = std::fs::File::create(target_md).unwrap();
-    file.write_all(md_data.as_bytes()).unwrap();
+    if output_path.ends_with(".md") {
+        output_data = convert2md::ref2md::convert(refs);
+    }
+
+    // write to file
+    let mut file = std::fs::File::create(output_path).unwrap();
+    file.write_all(output_data.as_bytes()).unwrap();
 
 }
