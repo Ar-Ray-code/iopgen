@@ -6,7 +6,7 @@
 // ===========================================
 use std::io::prelude::*;
 
-mod cpp;
+mod convert_func;
 mod convert2md;
 mod utils;
 mod structs;
@@ -17,7 +17,7 @@ fn main() {
     let (yaml_path, codes, output_path, title, jpn) =
         utils::args::parse_args();
 
-    let refs = cpp::cpp_func(yaml_path, codes);
+    let refs = convert_func::convert_func(yaml_path, codes);
     // println!("refs: {:?}", refs);
     
     if output_path.ends_with(".md") {
